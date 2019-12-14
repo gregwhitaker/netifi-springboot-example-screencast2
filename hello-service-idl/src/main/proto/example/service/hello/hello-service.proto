@@ -10,6 +10,9 @@ service HelloService {
 
     // Returns a hello message
     rpc GetHelloMessage (HelloRequest) returns (HelloResponse) {}
+
+    // Returns several hello messages in multiple languages
+    rpc GetHelloMessages (HelloRequest) returns (stream HelloResponse) {}
 }
 
 message HelloRequest {
