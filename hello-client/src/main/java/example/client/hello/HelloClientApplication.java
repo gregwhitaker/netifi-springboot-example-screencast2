@@ -39,13 +39,14 @@ public class HelloClientApplication {
             CountDownLatch latch = new CountDownLatch(1);
 
             // Call the service
-            helloServiceClient.getHelloMessage(request)
+            helloServiceClient.getHelloMessages(request)
+                    .doOnComplete(latch::countDown)
                     .subscribe(helloResponse -> {
                         LOG.info("Response: {}", helloResponse.getMessage());
                         latch.countDown();
                     });
 
-            // Wait for the async response
+            // Wait for the async responses
             latch.await();
         }
 
